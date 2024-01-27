@@ -27,58 +27,63 @@
                         <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
                     </form>
                 </div><!-- End .checkout-discount -->
-                <form action="#">
+                <form action="{{route('order')}}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-9">
                             <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <label>First Name *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
+                                        <input type="text" class="form-control" name="name">
+                                    </div>
 
-                                    <div class="col-sm-6">
+                                    {{-- <div class="col-sm-6">
                                         <label>Last Name *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
-                                </div><!-- End .row -->
+                                        <input type="text" class="form-control" >
+                                    </div> --}}
+                                </div>
+                                <label>Email address *</label>
+                                <input type="email" class="form-control" name="email">
 
-                                <label>Company Name (Optional)</label>
-                                <input type="text" class="form-control">
+                                <label>Contact Number *</label>
+                                <input type="text" class="form-control" name="contact">
 
-                                <label>Country *</label>
-                                <input type="text" class="form-control" required>
+                                {{-- <label>Company Name (Optional)</label>
+                                <input type="text" class="form-control"> --}}
+
+                                {{-- <label>Country *</label>
+                                <input type="text" class="form-control" > --}}
 
                                 <label>Street address *</label>
-                                <input type="text" class="form-control" placeholder="House number and Street name" required>
-                                <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..." required>
+                                <input type="text" class="form-control" placeholder="House number and Street name"  name="address">
+                                <label>Total *</label>
+                                <input type="text" class="form-control" name="price">
+                                {{-- <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..." > --}}
 
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-sm-6">
                                         <label>Town / City *</label>
                                         <input type="text" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
+                                    </div>
 
                                     <div class="col-sm-6">
                                         <label>State / County *</label>
                                         <input type="text" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
-                                </div><!-- End .row -->
+                                    </div>
+                                </div> --}}
 
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-sm-6">
                                         <label>Postcode / ZIP *</label>
                                         <input type="text" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
+                                    </div>
 
                                     <div class="col-sm-6">
                                         <label>Phone *</label>
                                         <input type="tel" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
-                                </div><!-- End .row -->
-
-                                <label>Email address *</label>
-                                <input type="email" class="form-control" required>
+                                    </div>
+                                </div> --}}
 
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="checkout-create-acc">
@@ -106,29 +111,31 @@
                                     </thead>
 
                                     <tbody>
+                                        @php $subtotal = 0 @endphp
+                                        @if(session('cart'))
+                                        @foreach(session('cart') as $id => $details)
                                         <tr>
-                                            <td><a href="#">Beige knitted elastic runner shoes</a></td>
-                                            <td>$84.00</td>
+                                            <td><a href="#">{{ $details['name'] }}</a></td>
+                                            <td>{{ $details['price'] }}</td>
+                                            @php $subtotal += $details['price']; @endphp
                                         </tr>
-
-                                        <tr>
-                                            <td><a href="#">Blue utility pinafore denimdress</a></td>
-                                            <td>$76,00</td>
-                                        </tr>
+                                        @endforeach
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
-                                            <td>$160.00</td>
-                                        </tr><!-- End .summary-subtotal -->
+                                            <td>${{ $subtotal }}</td>
+                                        </tr>
                                         <tr>
                                             <td>Shipping:</td>
                                             <td>Free shipping</td>
                                         </tr>
                                         <tr class="summary-total">
                                             <td>Total:</td>
-                                            <td>$160.00</td>
-                                        </tr><!-- End .summary-total -->
+                                            <td>${{ $subtotal }}</td>
+                                        </tr>
+                                        
+                                        @endif
                                     </tbody>
-                                </table><!-- End .table table-summary -->
+                                </table>
 
                                 <div class="accordion-summary" id="accordion-payment">
                                     <div class="card">
@@ -195,7 +202,7 @@
                                             <h2 class="card-title">
                                                 <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
                                                     Credit Card (Stripe)
-                                                    <img src="assets/images/payments-summary.png" alt="payments cards">
+                                                    <img src="frontend/images/payments-summary.png" alt="payments cards">
                                                 </a>
                                             </h2>
                                         </div><!-- End .card-header -->

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\backend\ProductController as BackendProductController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\frontent\Checkout;
 use App\Http\Controllers\frontent\HomeController;
 use App\Http\Controllers\frontent\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -28,10 +30,14 @@ Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('a
 Route::patch('update-cart', [ProductController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove.from.cart');
 
-Route::get('checkout', [ProductController::class, 'checkout'])->name('checkout');
+Route::get('checkout', [Checkout::class, 'index'])->name('checkout');
+Route::post('checkout', [Checkout::class, 'store'])->name('order');
 
 
 Route::get('/admin',[AdminController::class,'index']);
 Route::get('all-products',[BackendProductController::class,'index']);
 Route::get('add-product',[BackendProductController::class,'create']);
 Route::post('product/store',[BackendProductController::class,'store'])->name('product.store');
+
+
+Route::resource('brands', BrandController::class);

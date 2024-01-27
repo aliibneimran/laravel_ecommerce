@@ -57,8 +57,4 @@ class ProductController extends Controller
             session()->flash('success', 'Product removed successfully');
         }
     }
-    public function checkout(){
-        return view('frontend.checkout');
-    }
-
 }

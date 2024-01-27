@@ -9,7 +9,11 @@
           </li>
           {{-- products --}}
           <li class="sidebar-item">
-            <a class="sidebar-link waves-effect waves-dark" href="{{URL('all-products')}}" aria-expanded="false"><i class="fab fa-product-hunt"></i><span class="hide-menu">Product </span></a>
+            <a class="sidebar-link waves-effect waves-dark" href="{{URL('all-products')}}" aria-expanded="false"><i class="fab fa-product-hunt"></i><span class="hide-menu">Products </span></a>
+          </li>
+          {{-- brands --}}
+          <li class="sidebar-item">
+            <a class="sidebar-link waves-effect waves-dark" href="{{ route('brands.index') }}" aria-expanded="false"><i class="fab fa-product-hunt"></i><span class="hide-menu">Brands </span></a>
           </li>
 
 
