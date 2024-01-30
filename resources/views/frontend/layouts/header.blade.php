@@ -162,7 +162,7 @@
             <div class="dropdown cart-dropdown">
                 <a href="{{URL('cart')}}" class="dropdown-toggle">
                     <i class="icon-shopping-cart"></i>
-                    <span class="cart-count">2</span>
+                    <span class="cart-count">{{count(session()->get('cart'))}}</span>
                 </a>
             </div><!-- End .cart-dropdown -->
         </div><!-- End .header-right -->
