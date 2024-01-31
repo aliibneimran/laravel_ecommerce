@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontent;
 
 use App\Http\Controllers\Controller;
+use App\Models\frontend\Order;
 use App\Models\frontend\Product;
 use Illuminate\Http\Request;
 
@@ -57,5 +58,16 @@ class ProductController extends Controller
             session()->flash('success', 'Product removed successfully');
         }
         
+    }
+    public function order(Request $request){
+        $order = new Order();
+        $order_data = $request->all();
+        print_r($order_data);
+        $card = session('cart');
+        print_r($card);
+        $order_data ['coupon'] =  '100';
+        $order_data ['shipping_id'] =  '15';
+        $order->fill($order_data);
+       dd($order->all());
     }
 }

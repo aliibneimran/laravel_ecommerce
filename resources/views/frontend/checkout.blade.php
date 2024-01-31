@@ -34,14 +34,10 @@
                             <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <label>First Name *</label>
+                                        <label>Name *</label>
                                         <input type="text" class="form-control" name="name">
                                     </div>
 
-                                    {{-- <div class="col-sm-6">
-                                        <label>Last Name *</label>
-                                        <input type="text" class="form-control" >
-                                    </div> --}}
                                 </div>
                                 <label>Email address *</label>
                                 <input type="email" class="form-control" name="email">
@@ -49,41 +45,10 @@
                                 <label>Contact Number *</label>
                                 <input type="text" class="form-control" name="contact">
 
-                                {{-- <label>Company Name (Optional)</label>
-                                <input type="text" class="form-control"> --}}
-
-                                {{-- <label>Country *</label>
-                                <input type="text" class="form-control" > --}}
-
                                 <label>Street address *</label>
                                 <input type="text" class="form-control" placeholder="House number and Street name"  name="address">
                                 <label>Total *</label>
                                 <input type="text" class="form-control" name="price">
-                                {{-- <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..." > --}}
-
-                                {{-- <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>Town / City *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <label>State / County *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                </div> --}}
-
-                                {{-- <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>Postcode / ZIP *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <label>Phone *</label>
-                                        <input type="tel" class="form-control" required>
-                                    </div>
-                                </div> --}}
 
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="checkout-create-acc">
@@ -105,6 +70,7 @@
                                 <table class="table table-summary">
                                     <thead>
                                         <tr>
+                                            <th>Image</th>
                                             <th>Product</th>
                                             <th>Total</th>
                                         </tr>
@@ -115,6 +81,7 @@
                                         @if(session('cart'))
                                         @foreach(session('cart') as $id => $details)
                                         <tr>
+                                            <td><a href="#"><img src="{{ asset('uploads/' .  $details['image']) }}" alt="Product image" width="50px" height="50px"></a></td>
                                             <td><a href="#">{{ $details['name'] }}</a></td>
                                             <td>{{ $details['price'] }}</td>
                                             @php $subtotal += $details['price']; @endphp
@@ -123,6 +90,8 @@
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
                                             <td>${{ $subtotal }}</td>
+                                            <input type="hideen" value="{{$subtotal}}">
+                                            <input type="hideen" value="{{$subtotal}}">
                                         </tr>
                                         <tr>
                                             <td>Shipping:</td>

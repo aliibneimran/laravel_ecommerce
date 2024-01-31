@@ -32,6 +32,7 @@ Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('r
 
 Route::get('checkout', [Checkout::class, 'index'])->name('checkout');
 Route::post('checkout', [Checkout::class, 'store'])->name('order');
+Route::post('checkout', [ProductController::class, 'order'])->name('order');
 
 
 Route::get('/admin',[AdminController::class,'index']);
