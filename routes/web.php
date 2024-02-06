@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\frontent\Checkout;
 use App\Http\Controllers\frontent\HomeController;
 use App\Http\Controllers\frontent\ProductController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,3 +43,9 @@ Route::post('product/store',[BackendProductController::class,'store'])->name('pr
 
 
 Route::resource('brands', BrandController::class);
+
+Route::get('/orders',[OrderController::class,'index']);
+
+Route::get('/pdf',[OrderController::class,'pdfview']);
+
+Route::get('/invoice', [OrderController::class, 'Invoice']);

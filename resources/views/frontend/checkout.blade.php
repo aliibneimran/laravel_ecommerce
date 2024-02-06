@@ -90,8 +90,6 @@
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
                                             <td>${{ $subtotal }}</td>
-                                            <input type="hideen" value="{{$subtotal}}">
-                                            <input type="hideen" value="{{$subtotal}}">
                                         </tr>
                                         <tr>
                                             <td>Shipping:</td>
@@ -100,6 +98,8 @@
                                         <tr class="summary-total">
                                             <td>Total:</td>
                                             <td>${{ $subtotal }}</td>
+                                            <input type="hideen" name="sub_total" value="{{$subtotal}}">
+                                            <input type="hideen" name="total" value="{{$subtotal}}">
                                         </tr>
                                         
                                         @endif
